@@ -1,0 +1,50 @@
+@charset "utf-8";
+/*클래스는 여러개 사용 가능. 아이디는 한 문서에 한번만 사용 가능.*/
+
+body {
+	background-color: #f7f7f7;
+	font-family: Noto Sans CJK KR;
+	color: navy;}	
+a:link {
+	color: #ff0055;
+	text-decoration: none; /* 링크의 밑줄을 없앤다. 이는 body 태그의 자체 속성으로는 불가능하다. */}
+a:visited {
+	color: #5500ff;
+	text-decoration: none;}
+a:active {
+	color: #ff00ff;
+	text-decoration: none;}
+a:hover {
+	/* 마우스 커서를 가져다 대면 링크가 짙은 하늘색으로 변하면서 사라졌던 밑줄이 다시 생긴다.
+	이는 body 태그의 자체 속성으로는 불가능하다. */
+	color: #0055ff;
+	text-decoration: underline;}
+.h2_1 {color: red;}
+h1 {font-family: SeoulNamsan;}
+h6 {font-family: SeoulHangang;}
+
+/*content-padding-border-margin*/
+.div_sample {
+	width: 320px;
+	padding: 10px;
+	border: 5px solid maroon;
+	margin: 30;}
+/*
+	디스플레이
+		.inline { display: inline; }
+		.inline-block { display: inline-block; }
+	포지션
+		div { position: static; }
+		div.relative { position: relative; left: 30px; }
+		div.fixed { position: fixed; top: 0; right: 0; }
+		div.absolute { position: absolute; top: 50px; right: 0; }
+	플로트
+		img { float: left; }
+		.good { overflow: auto; }
+*/
+
+/* 화면 해상도 별로 CSS 작성 */
+@media (min-width: 1000px) {
+	.body_1 { margin: 40px 40px; }}
+@media (max-width: 400px) {
+	.body_1 { margin: 10px 10px; }}

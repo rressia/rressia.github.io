@@ -1,0 +1,28 @@
+yt-dlp
+
+-f, --format FORMAT                              Video format code
+-F, --list-formats                               List available formats of each video. Simulate unless --no-
+--write-subs                                     Write subtitle file
+--list-subs                                      List available subtitles of each video
+--sub-format FORMAT                              Subtitle format; accepts formats preference separated by "/"
+--sub-langs LANGS                                Languages of the subtitles to download
+Preset Aliases:
+    -t mp3                                           -f 'ba[acodec^=mp3]/ba/b' -x --audio-format mp3
+    -t aac                                           -f 'ba[acodec^=aac]/ba[acodec^=mp4a.40.]/ba/b' -x --audio-format aac
+    -t mp4                                           --merge-output-format mp4 --remux-video mp4 -S
+                                                     vcodec:h264,lang,quality,res,fps,hdr:12,acodec:aac
+    -t mkv                                           --merge-output-format mkv --remux-video mkv
+    -t sleep                                         --sleep-subtitles 5 --sleep-requests 0.75 --sleep-interval 10
+                                                     --max-sleep-interval 20
+
+
+
+yt-dlp_linux -F --list-subs
+yt-dlp_linux -f "available format ID"
+yt-dlp_linux -f mp4
+yt-dlp_linux -f "b[height=1080]" //b=best
+ex yt-dlp_linux -f "(mp4,webm)[height<480]"
+yt-dlp_linux -t mp4 --write-subs --sub-format srt --sub-langs ko,en
+
+my command :
+yt-dlp_linux -f "mp4[height=1080]" -o "%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en
