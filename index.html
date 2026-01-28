@@ -14,7 +14,7 @@
             --accent: #2980b9; /* 미색과 잘 어울리는 포인트 컬러 */
         }
         * { box-sizing: border-box; }
-        body { display: flex; margin: 0; font-family: sans-serif; height: 100vh; }
+        body { display: flex; margin: 0; font-family: sans-serif; height: 100vh; overflow: hidden; }
 
         /* 사이드바 레이아웃 */
         #sidebar { width: 260px; background: var(--bg-sidebar); color: var(--text-side); display: flex; flex-direction: column; }
@@ -81,14 +81,52 @@
     
         }
         
+		/* 햄버거 버튼 스타일 (기본 숨김) */
+		.hamburger {
+		    display: none;
+		    position: fixed;
+		    top: 10px;
+		    left: 10px;
+		    z-index: 1000;
+		    background: var(--bg-sidebar);
+		    color: white;
+		    border: none;
+		    font-size: 1.5rem;
+		    padding: 5px 12px;
+		    border-radius: 4px;
+		    cursor: pointer;
+		}
+
         /* 모바일 대응 */
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            #sidebar { width: 100%; height: 200px; }
-        }
+		@media (max-width: 768px) {
+		    .hamburger { display: block; } /* 모바일에서 버튼 보임 */
+		
+		    #sidebar {
+		        position: fixed;
+		        left: -260px; /* 사이드바를 왼쪽 밖으로 숨김 */
+		        top: 0;
+		        bottom: 0;
+		        z-index: 999;
+		        transition: 0.3s; /* 부드러운 열림 효과 */
+        		height: 100vh;
+		    }
+
+		    /* 사이드바가 열렸을 때 클래스 */
+		    #sidebar.open {
+        		left: 0;
+		    }
+
+		    #content-wrapper {
+        		margin-left: 0;
+		        width: 100%;
+		    }
+		}
     </style>
 </head>
 <body>
+
+<!-- 햄버거 메뉴 버튼 추가 -->
+<button id="menu-toggle" class="hamburger">☰</button>
 
 <nav id="sidebar">
     <div class="side-header">
@@ -199,7 +237,27 @@
             document.getElementById('fontSelect').value = savedFont;
         }
     };
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        // 버튼 모양 변경 (선택사항)
+        menuToggle.innerText = sidebar.classList.contains('open') ? '✕' : '☰';
+    });
+
+    // 링크 클릭 시 사이드바 닫기 (모바일 편의성)
+    document.querySelectorAll('.doc-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+                menuToggle.innerText = '☰';
+            }
+        });
+    });    
 </script>
 
 </body>
 </html>
+
