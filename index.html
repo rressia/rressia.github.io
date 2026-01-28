@@ -9,8 +9,7 @@
             --bg-sidebar: #2c3e50;
             /* 눈이 편안한 미색 (Sepia/Paper 톤) */
             --bg-content: #fdf6e3; 
-            /* 완전한 검정색보다는 짙은 회색이 눈에 덜 자극적입니다 */
-            --text-main: #586e75; 
+            --text-main: #000000; /* 본문 글자색을 완전한 검정으로 변경 */
             --text-side: #ecf0f1;
             --accent: #d33682; /* 미색과 잘 어울리는 포인트 컬러 */
         }
@@ -45,15 +44,16 @@
         #content-wrapper { flex: 1; display: flex; flex-direction: column; background: var(--bg-content); }
         #content { 
             flex: 1; 
-            padding: 20px 30px; /* 상하 여백을 줄여 더 많은 내용 노출 */
+            padding: 15px 25px; /* 상하 여백을 줄여 더 많은 내용 노출 */
             overflow-y: auto; 
             white-space: pre-wrap; 
             word-break: break-all; 
             font-family:'IBM Plex Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
 
-            /* 정보 밀도를 높이기 위한 설정 */
-            line-height: 1.4;   /* 줄 간격을 표준에 가깝게 조절 */
-            font-size: 0.95rem; /* 폰트 크기를 살짝 줄임 */
+            /* 정보 밀도 최적화 설정 */
+            line-height: 1.35;   /* 줄 간격을 더 타이트하게 조정 */
+            font-size: 0.92rem;  /* 폰트 크기를 미세하게 더 축소 */
+            color: var(--text-main); /* 검정색 적용 */
             letter-spacing: -0.02em; /* 글자 간격을 좁혀 밀도 향상 */
     
         }
