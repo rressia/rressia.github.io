@@ -2,53 +2,115 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Tip Archive</title>
     <style>
-        body { display: flex; margin: 0; font-family: sans-serif; height: 100vh; }
-        /* 왼쪽 문서 목록 */
-        #sidebar { width: 300px; background: #f4f4f4; border-right: 1px solid #ddd; overflow-y: auto; padding: 20px; }
-        /* 오른쪽 텍스트 내용 */
-        #content { flex: 1; padding: 40px; overflow-y: auto; white-space: pre-wrap; background: #fff; line-height: 1.6; }
-        .doc-link { display: block; padding: 8px; color: #333; text-decoration: none; border-bottom: 1px solid #eee; }
-        .doc-link:hover { background: #e0e0e0; }
-        h3 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+        :root {
+            --bg-sidebar: #2c3e50;
+            --bg-content: #ffffff;
+            --text-main: #333;
+            --text-side: #ecf0f1;
+            --accent: #3498db;
+        }
+        * { box-sizing: border-box; }
+        body { display: flex; margin: 0; font-family: 'Pretendard', -apple-system, sans-serif; height: 100vh; color: var(--text-main); }
+
+        /* 사이드바 */
+        #sidebar { 
+            width: 280px; background: var(--bg-sidebar); color: var(--text-side); 
+            display: flex; flex-direction: column; border-right: 1px solid #ddd;
+        }
+        .side-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .side-header h3 { margin: 0; font-size: 1.1rem; letter-spacing: 1px; }
+        
+        /* 검색창 */
+        #search {
+            width: calc(100% - 40px); margin: 15px 20px; padding: 8px 12px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: white; border-radius: 6px; outline: none;
+        }
+
+        .doc-list { overflow-y: auto; flex: 1; padding: 10px 0; }
+        .doc-link { 
+            display: block; padding: 10px 25px; color: #bdc3c7; text-decoration: none; 
+            font-size: 0.9rem; transition: 0.2s; border-left: 3px solid transparent;
+            cursor: pointer;
+        }
+        .doc-link:hover { background: rgba(255,255,255,0.05); color: white; border-left-color: var(--accent); }
+        .doc-link.active { background: rgba(255,255,255,0.1); color: white; border-left-color: var(--accent); font-weight: bold; }
+
+        /* 본문 영역 */
+        #content-wrapper { flex: 1; display: flex; flex-direction: column; background: var(--bg-content); }
+        #content { 
+            flex: 1; padding: 40px; overflow-y: auto; 
+            white-space: pre-wrap; /* 텍스트 줄바꿈 유지 */
+            word-break: break-all; font-family: 'Consolas', 'Courier New', monospace;
+            line-height: 1.7; font-size: 1rem;
+        }
+        
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            #sidebar { width: 100%; height: 200px; }
+        }
     </style>
 </head>
 <body>
 
-<div id="sidebar">
-    <h3>문서 목록</h3>
-    <!-- 여기에 텍스트 파일 링크를 추가하세요 -->
-    <a class="doc-link" href="#" onclick="loadTxt('tips/ai.txt')">📄 ai.txt</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/app_shortcut')">📄 app_shortcut</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/css')">📄 css</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/git.txt')">📄 git.txt</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/html')">📄 html</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/lemp')">📄 lemp</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/linux_tips.txt')">📄 linux_tips.txt</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/linuxmint 19.3.txt')">📄 linuxmint 19.3.txt</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/markdown.md')">📄 markdown.md</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/rust.txt')">📄 rust.txt</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/yt-dlp')">📄 yt-dlp</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/111')">📄 111</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/111')">📄 111</a>
-    <a class="doc-link" href="#" onclick="loadTxt('tips/111')">📄 111</a>
-</div>
+<nav id="sidebar">
+    <div class="side-header">
+        <h3>💡 TIP ARCHIVE</h3>
+    </div>
+    <input type="text" id="search" placeholder="문서 검색..." onkeyup="filterDocs()">
+    <div class="doc-list" id="docList">
+        <!-- 경로 끝에 .txt가 없어도 파일명에 따라 적절히 호출됨 -->
+        <a class="doc-link" onclick="loadTxt(this, 'tips/ai.txt')">ai.txt</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/app_shortcut')">app_shortcut</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/css')">css</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/git.txt')">git.txt</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/html')">html</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/lemp')">lemp</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/linux_tips.txt')">linux_tips.txt</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/linuxmint 19.3.txt')">linuxmint 19.3.txt</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/markdown.md')">markdown.md</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/rust.txt')">rust.txt</a>
+        <a class="doc-link" onclick="loadTxt(this, 'tips/yt-dlp')">yt-dlp</a>
+    </div>
+</nav>
 
-<div id="content">왼쪽 목록에서 문서를 선택하세요.</div>
+<main id="content-wrapper">
+    <div id="content">목록에서 문서를 선택하세요.</div>
+</main>
 
 <script>
-    async function loadTxt(fileName) {
+    async function loadTxt(element, fileName) {
+        // 활성 상태 표시 업데이트
+        const links = document.querySelectorAll('.doc-link');
+        links.forEach(l => l.classList.remove('active'));
+        element.classList.add('active');
+
         const contentDiv = document.getElementById('content');
         contentDiv.innerText = '불러오는 중...';
+        
         try {
             const response = await fetch(fileName);
             if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
             const text = await response.text();
-            contentDiv.innerText = text; // 텍스트 그대로 출력
+            contentDiv.innerText = text;
+            contentDiv.scrollTop = 0; // 새 문서 로드 시 스크롤 상단으로
         } catch (err) {
             contentDiv.innerText = '에러: ' + err.message;
         }
+    }
+
+    // 간단한 검색 기능
+    function filterDocs() {
+        const query = document.getElementById('search').value.toLowerCase();
+        const links = document.querySelectorAll('.doc-link');
+        links.forEach(link => {
+            const text = link.innerText.toLowerCase();
+            link.style.display = text.includes(query) ? 'block' : 'none';
+        });
     }
 </script>
 
