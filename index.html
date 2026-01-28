@@ -9,9 +9,9 @@
             --bg-sidebar: #2c3e50;
             /* 눈이 편안한 미색 (Sepia/Paper 톤) */
             --bg-content: #fdf6e3; 
-            --text-main: #000000; /* 본문 글자색을 완전한 검정으로 변경 */
+            --text-main: #222222; /* 완전한 검정(#000)보다 한 단계 연한 짙은 회색 */
             --text-side: #ecf0f1;
-            --accent: #d33682; /* 미색과 잘 어울리는 포인트 컬러 */
+            --accent: #2980b9; /* 미색과 잘 어울리는 포인트 컬러 */
         }
         * { box-sizing: border-box; }
         body { display: flex; margin: 0; font-family: 'Pretendard', -apple-system, sans-serif; height: 100vh; color: var(--text-main); }
@@ -54,6 +54,7 @@
             line-height: 1.35;   /* 줄 간격을 더 타이트하게 조정 */
             font-size: 0.92rem;  /* 폰트 크기를 미세하게 더 축소 */
             color: var(--text-main); /* 검정색 적용 */
+            font-weight: 400; /* 글자가 너무 두꺼우면 다시 검게 보일 수 있어 굵기 조절 */
             letter-spacing: -0.02em; /* 글자 간격을 좁혀 밀도 향상 */
     
         }
