@@ -40,6 +40,16 @@
         .doc-link:hover { background: rgba(255,255,255,0.05); color: white; border-left-color: var(--accent); }
         .doc-link.active { background: rgba(255,255,255,0.1); color: white; border-left-color: var(--accent); font-weight: bold; }
 
+        /* 폰트 설정 영역 (사이드바 하단) */
+        .font-settings { 
+            padding: 15px; background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+        }
+        .font-settings select, .font-settings input { 
+            width: 100%; margin-top: 5px; padding: 4px; font-size: 0.8rem; 
+            background: #34495e; color: white; border: 1px solid #555;
+        }
+
         /* 본문 영역 */
         #content-wrapper { flex: 1; display: flex; flex-direction: column; background: var(--bg-content); }
         #content { 
@@ -88,6 +98,24 @@
         <a class="doc-link" onclick="loadTxt(this, 'tips/rust.txt')">rust.txt</a>
         <a class="doc-link" onclick="loadTxt(this, 'tips/yt-dlp')">yt-dlp</a>
     </div>
+
+    <!-- 폰트 선택 설정 -->
+    <div class="font-settings">
+        <label>폰트 설정 (고정폭)</label>
+        <select id="fontSelect" onchange="changeFont(this.value)">
+            <option value="'IBM Plex Mono', 'Fira Code', monospace">IBM Plex Mono / Fira Code</option>
+            <option value="'Aurulent Sans Mono', 'Monaco', monospace">Aurulent Sans Mono / Monaco</option>
+            <option value="'Monaspace Argon', 'PT Mono', monospace">Monaspace Argon / PT Mono</option>
+            <option value="'Office Code Pro', 'Source Code Pro', monospace">Office Code Pro / Source Code Pro</option>
+            <option value="'Consolas', 'Monaco', monospace">Consolas</option>
+            <option value="'D2Coding', 'Nanum Gothic Coding', monospace">D2Coding / 나눔고딕</option>
+            <option value="'Cascadia Code', 'JetBrains Mono', monospace">Cascadia / JetBrains</option>
+            <option value="custom">직접 입력...</option>
+        </select>
+        <input type="text" id="customFont" placeholder="폰트 이름 입력 후 엔터" 
+               style="display:none;" onkeypress="if(event.keyCode==13) changeFont(this.value)">
+    </div>
+
 </nav>
 
 <main id="content-wrapper">
@@ -124,6 +152,28 @@
             link.style.display = text.includes(query) ? 'block' : 'none';
         });
     }
+
+    // 폰트 변경 함수
+    function changeFont(fontName) {
+        const customInput = document.getElementById('customFont');
+        if (fontName === 'custom') {
+            customInput.style.display = 'block';
+            return;
+        }
+        // 본문에 폰트 적용 (입력한 폰트가 시스템에 있으면 적용됨)
+        document.getElementById('content').style.fontFamily = fontName + ", monospace";
+        // 선택 값 저장 (브라우저 로컬 스토리지)
+        localStorage.setItem('userFont', fontName);
+    }
+
+    // 페이지 로드 시 저장된 폰트 불러오기
+    window.onload = () => {
+        const savedFont = localStorage.getItem('userFont');
+        if (savedFont) {
+            changeFont(savedFont);
+            document.getElementById('fontSelect').value = savedFont;
+        }
+    };
 </script>
 
 </body>
