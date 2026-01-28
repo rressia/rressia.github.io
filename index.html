@@ -6,6 +6,7 @@
     <title>My Tip Archive</title>
     <style>
         :root {
+            --bg-sidebar: #2c3e50;
             /* 눈이 편안한 미색 (Sepia/Paper 톤) */
             --bg-content: #fdf6e3; 
             /* 완전한 검정색보다는 짙은 회색이 눈에 덜 자극적입니다 */
@@ -14,11 +15,11 @@
             --accent: #d33682; /* 미색과 잘 어울리는 포인트 컬러 */
         }
         * { box-sizing: border-box; }
-        body { display: flex; margin: 0; font-family:'Pretendard', -apple-system, sans-serif; height: 100vh; color: var(--text-main); }
+        body { display: flex; margin: 0; font-family: 'Pretendard', -apple-system, sans-serif; height: 100vh; color: var(--text-main); }
 
         /* 사이드바 */
         #sidebar { 
-            width: 280px; background: var(--bg-sidebar); color: var(--text-side); 
+            width: 240px; background: var(--bg-sidebar); color: var(--text-side); 
             display: flex; flex-direction: column; border-right: 1px solid #ddd;
         }
         .side-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -43,10 +44,18 @@
         /* 본문 영역 */
         #content-wrapper { flex: 1; display: flex; flex-direction: column; background: var(--bg-content); }
         #content { 
-            flex: 1; padding: 40px; overflow-y: auto; 
-            white-space: pre-wrap; /* 텍스트 줄바꿈 유지 */
-            word-break: break-all; font-family: 'IBM Plex Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
-            line-height: 1.7; font-size: 1rem;
+            flex: 1; 
+            padding: 20px 30px; /* 상하 여백을 줄여 더 많은 내용 노출 */
+            overflow-y: auto; 
+            white-space: pre-wrap; 
+            word-break: break-all; 
+            font-family:'IBM Plex Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+
+            /* 정보 밀도를 높이기 위한 설정 */
+            line-height: 1.4;   /* 줄 간격을 표준에 가깝게 조절 */
+            font-size: 0.95rem; /* 폰트 크기를 살짝 줄임 */
+            letter-spacing: -0.02em; /* 글자 간격을 좁혀 밀도 향상 */
+    
         }
         
         /* 모바일 대응 */
