@@ -1,0 +1,15 @@
+선택도구(V)
+	여러개 선택 Click+Drag or Shift+Click
+	비율유지 확대축소 Shift+BoundingBoxClick+Drag
+	수직수평이동 오브젝트선택 후 Shift+이동
+도형툴
+	정도형그리기 Shift+Drag
+	크기입력 Click
+돋보기(Z)
+	확대축소 Ctrl + -
+손도구(H)
+	Space 누른채 사용
+펜
+	열린도형or마지막펜 Enter
+	수직수평 Shift
+	
