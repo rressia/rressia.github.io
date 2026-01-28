@@ -1,0 +1,60 @@
+설치 및 정리
+
+-리눅스민트 19.3 설치 (한국어로 설치 시 한글화 및 한글입력기 모두 설치됨)
+-그래픽카드 드라이버 설치
+-소프트웨어 소스 속도빠른 적당한 국내 서버로 설정
+-업데이트 매니저로 전체 업데이트
+-공유 설정 (삼바 설치)
+-프로그램 인스톨 (chrome brave vivaldi focuswriter gimp inkscape mypaint geany ranger sublimetext vscode leafpad onlyoffice vlc smplayer clementine audacious 4kvideodownloader+ cherrytree synapse goldendict gparted filezilla wine virtualbox guake ncdu duf)
+-와인용 프로그램 (easyview honeyview bandizip hearthstone soase counterstrike)
+-웹브라우저 북마크 설정
+-필요한 폰트 설치 (나눔고딕 설치했더니 영문+노토가 영문+나눔으로 바뀌는 현상->linux_tips.txt 참조)
+-YACReader wxHexEditor meld terminator micro peazip cmus(moc(mocp로 실행)은 많은수의 파일 다루면 불안정함)
+-gimagereader tesseract-ocr-eng tesseract-ocr-kor converseen xnview qpdview
+-sudo add-apt-repository ppa:apandada1/foliate;sudo apt update;sudo apt install foliate
+-fireDM(+ffmpeg) btop(bashtop, pytop c++ 버전), zeal, rust, git
+-cudatext, jedit, tea, qalculate, textosaurus, koodo reader, novelwriter, scrivener
+-milkytracker, qmplay2, open cubic player, mediainfo, uget, tilix, cava
+-eza, zoxide, coolreader, thorium, qmplay2, tealdeer, pinta, yt-dlp_linux
+---
+virtualbox & os
+manjaro, w81(cs6), linuxlite, winxp(hwp,cs4)
+---
+wine hearthstone focus error
+before running the game turn on emulate virtual desktop in wine configuration>graphics
+---
+webmin 설치 후 https://your_domain:10000
+sudo ufw enable / sudo ufw disable / sudo ufw status verbose
+sudo ufw allow 10000 / sudo ufw deny 10000
+---
+리눅스민트 설치 후 사용자는 해당사용자의 암호로 sudo를 이용할 수 있다. 단 su root는 할 수 없다. root는 사용불가이기 때문.
+따라서 sudo passwd root로 루트암호를 설정해야 su root로 루트계정을 사용할 수 있게 된다.
+---
+와인용 프로그램 메뉴에서 보여지는 이름 수정
+$HOME/.local/share/applications의 desktop파일 내용중 Name항목 수정
+---
+textosaurus
+여러 텍스트 에디터 중 소설뷰어로 선택.
+monokai neo theme, 리디바탕 16. 에디터들 중 한글 가장 깔끔하게 보임. 워드랩 기본. 여러 인코팅 지원.
+좌측 여백 없는 게 아쉬움. 줄번호로 대신함. 한글입력 안됨.
+---
+scrivener 1.9 + kime
+---
+rust 설치 : curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rust의 cargo 패키지 매니저로 필요 crate 설치 : cargo install exa bat
+git, gitgui 설치 -> git...로 실행, git gui로 실행
+---
+PDFStudioViewer 내용이 복잡하거나 용량이 큰 pdf를 가장 빠르게 보여준다.
+---
+add-apt-repository ppa:hsheth2/ppa;apt update;apt install cava
+---
+ubuntu 18.04 : USB : Not authorized to perform operation 오류
+해결책으론 Chrome 원격 데스크톱 서비스를 중지 합니다 (명령어)
+$ /opt/google/chrome-remote-desktop/chrome-remote-desktop --stop
+Chrome 원격 데스크톱 서비스를 다시 시작 하기 위한 명령어
+$ /opt/google/chrome-remote-desktop/chrome-remote-desktop --start
+chrome-remote-desktop remove하고 rustdesk 쓸 것.
+---
+최신 libreoffice appimage jre관련 에러 뜨면서 실행 안 될 경우(아마 libreoffice 이전 버전 deb 설치되어 있을 경우)
+libreoffice 이전 버전 실행 후 - 도구 - 기본 설정 - LibreOffice - 고급 설정 - java Runtime Environment 사용 해제 후 최신 libreoffice appimage 실행
+---
