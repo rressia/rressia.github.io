@@ -14,15 +14,26 @@
             --accent: #2980b9; /* 미색과 잘 어울리는 포인트 컬러 */
         }
         * { box-sizing: border-box; }
-        body { display: flex; margin: 0; font-family: 'Pretendard', -apple-system, sans-serif; height: 100vh; color: var(--text-main); }
+        body { display: flex; margin: 0; font-family: sans-serif; height: 100vh; overflow: hidden; }
 
-        /* 사이드바 */
-        #sidebar { 
-            width: 240px; background: var(--bg-sidebar); color: var(--text-side); 
-            display: flex; flex-direction: column; border-right: 1px solid #ddd;
+        /* 사이드바 레이아웃 */
+        #sidebar { width: 260px; background: var(--bg-sidebar); color: var(--text-side); display: flex; flex-direction: column; }
+        .side-header { padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        #search { width: calc(100% - 30px); margin: 10px 15px; padding: 6px; border-radius: 4px; border: none; outline: none; background: rgba(255,255,255,0.1); color: white; }
+
+        /* 폴더 및 리스트 스타일 */
+        .doc-list { flex: 1; overflow-y: auto; padding: 5px 0; }
+        
+        /* 폴더(details) 스타일 */
+        details { margin-bottom: 2px; }
+        summary { 
+            padding: 8px 20px; cursor: pointer; font-size: 0.85rem; font-weight: bold; 
+            color: #95a5a6; list-style: none; transition: 0.2s;
         }
-        .side-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .side-header h3 { margin: 0; font-size: 1.1rem; letter-spacing: 1px; }
+        summary:hover { color: white; background: rgba(255,255,255,0.05); }
+        summary::before { content: "📁 "; margin-right: 5px; font-weight: normal; }
+        details[open] summary { color: var(--accent); }
+        details[open] summary::before { content: "📂 "; }
         
         /* 검색창 */
         #search {
@@ -31,13 +42,14 @@
             color: white; border-radius: 6px; outline: none;
         }
 
+        /* 문서 링크 스타일 */
         .doc-list { overflow-y: auto; flex: 1; padding: 10px 0; }
         .doc-link { 
-            display: block; padding: 10px 25px; color: #bdc3c7; text-decoration: none; 
-            font-size: 0.9rem; transition: 0.2s; border-left: 3px solid transparent;
-            cursor: pointer;
+            display: block; padding: 6px 20px 6px 40px; color: #bdc3c7; 
+            text-decoration: none; font-size: 0.82rem; cursor: pointer; 
+            border-left: 3px solid transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .doc-link:hover { background: rgba(255,255,255,0.05); color: white; border-left-color: var(--accent); }
+        .doc-link:hover, .doc-link.active { background: rgba(255,255,255,0.1); color: white; border-left-color: var(--accent); }
         .doc-link.active { background: rgba(255,255,255,0.1); color: white; border-left-color: var(--accent); font-weight: bold; }
 
         /* 폰트 설정 영역 (사이드바 하단) */
@@ -85,18 +97,29 @@
     <input type="text" id="search" placeholder="문서 검색..." onkeyup="filterDocs()">
     <div class="doc-list" id="docList">
         <!-- 경로 끝에 .txt가 없어도 파일명에 따라 적절히 호출됨 -->
-        <a class="doc-link" onclick="loadTxt(this, 'tips/ai.txt')">ai.txt</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/alias.txt')">alias.txt</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/app_shortcut')">app_shortcut</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/css')">css</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/git.txt')">git.txt</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/html')">html</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/lemp')">lemp</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/linux_tips.txt')">linux_tips.txt</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/linuxmint 19.3.txt')">linuxmint 19.3.txt</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/markdown.md')">markdown.md</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/rust.txt')">rust.txt</a>
-        <a class="doc-link" onclick="loadTxt(this, 'tips/yt-dlp')">yt-dlp</a>
+        <details open>
+            <summary>Programming</summary>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/git.txt')">git.txt</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/rust.txt')">rust.txt</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/css')">css</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/html')">html</a>
+        </details>
+
+        <details>
+            <summary>Linux & Server</summary>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/linux_tips.txt')">linux_tips.txt</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/linuxmint 19.3.txt')">linuxmint 19.3.txt</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/lemp')">lemp</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/alias.txt')">alias.txt</a>
+        </details>
+
+        <details>
+            <summary>Others</summary>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/ai.txt')">ai.txt</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/yt-dlp')">yt-dlp</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/app_shortcut')">app_shortcut</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/markdown.md')">markdown.md</a>
+        </details>
     </div>
 
     <!-- 폰트 선택 설정 -->
@@ -146,10 +169,12 @@
     // 간단한 검색 기능
     function filterDocs() {
         const query = document.getElementById('search').value.toLowerCase();
-        const links = document.querySelectorAll('.doc-link');
-        links.forEach(link => {
-            const text = link.innerText.toLowerCase();
-            link.style.display = text.includes(query) ? 'block' : 'none';
+        // 검색 시에는 모든 폴더를 일시적으로 펼침
+        document.querySelectorAll('details').forEach(det => {
+            if (query) det.open = true;
+        });
+        document.querySelectorAll('.doc-link').forEach(link => {
+            link.style.display = link.innerText.toLowerCase().includes(query) ? 'block' : 'none';
         });
     }
 
