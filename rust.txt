@@ -1,2 +1,0 @@
-rustc로 용량 줄여 컴파일하기
-rustc -C opt-level=z -C lto -C strip=symbols 소스코드
