@@ -1,2 +1,12 @@
 rustc로 용량 줄여 컴파일하기
 rustc -C opt-level=z -C lto -C strip=symbols 소스코드
+---
+새 폴더에 프로젝트 생성 및 초기화
+cargo new project_name
+cd project_name
+기존 폴더에 프로젝트만 초기화
+cargo init
+빌드
+cargo build
+실행
+cargo run

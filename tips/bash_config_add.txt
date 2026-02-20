@@ -1,0 +1,111 @@
+alias e='eza --group-directories-first'
+alias ee='eza --group-directories-first -al'
+alias ㅊㅇ='cd'
+alias ㅣㄴ='eza'
+alias ㄷ='eza'
+alias b='bat'
+alias ㅠ='bat'
+alias r='ranger'
+alias ㄱ='ranger'
+alias m='micro'
+alias ㅡ='micro'
+alias ㅋ='z'
+alias n='nvim-linux-x86_64.appimage'
+alias ydh='echo "ydd : 영상+자막 다운로드,  -f ID 필요";echo "ydw : webm+opus 다운로드";echo "yda : avc+mp4a 다운로드";echo "yds : 자막만 다운로드";echo "ydf : 다운로드 가능한 목록"'
+alias ydd='yt-dlp_linux -o "~/비디오/yt-dlp/%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en'
+alias ydw='yt-dlp_linux -f 248+251 -o "~/비디오/yt-dlp/%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en'
+alias yda='yt-dlp_linux -f 137+140 -o "~/비디오/yt-dlp/%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en'
+alias yds='yt-dlp_linux --skip-download -o "~/비디오/yt-dlp/%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en'
+alias ydf='yt-dlp_linux -F'
+alias rustcc='rustc -C opt-level=z -C lto -C strip=symbols'
+
+export PATH=$PATH:/home/apps
+
+# =============================================================================
+#
+# Utility functions for zoxide.
+#
+
+# pwd based on the value of _ZO_RESOLVE_SYMLINKS.
+function __zoxide_pwd() {
+    \builtin pwd -L
+}
+
+# cd + custom logic based on the value of _ZO_ECHO.
+function __zoxide_cd() {
+    # shellcheck disable=SC2164
+    \builtin cd -- "$@"
+}
+
+# =============================================================================
+#
+# Hook configuration for zoxide.
+#
+
+# Hook to add new entries to the database.
+__zoxide_oldpwd="$(__zoxide_pwd)"
+
+function __zoxide_hook() {
+    \builtin local -r retval="$?"
+    \builtin local pwd_tmp
+    pwd_tmp="$(__zoxide_pwd)"
+    if [[ ${__zoxide_oldpwd} != "${pwd_tmp}" ]]; then
+        __zoxide_oldpwd="${pwd_tmp}"
+        \command zoxide add -- "${__zoxide_oldpwd}"
+    fi
+    return "${retval}"
+}
+
+# Initialize hook.
+if [[ ${PROMPT_COMMAND:=} != *'__zoxide_hook'* ]]; then
+    PROMPT_COMMAND="__zoxide_hook;${PROMPT_COMMAND#;}"
+fi
+
+# =============================================================================
+#
+# When using zoxide with --no-cmd, alias these internal functions as desired.
+#
+
+__zoxide_z_prefix='z#'
+
+# Jump to a directory using only keywords.
+function __zoxide_z() {
+    # shellcheck disable=SC2199
+    if [[ $# -eq 0 ]]; then
+        __zoxide_cd ~
+    elif [[ $# -eq 1 && $1 == '-' ]]; then
+        __zoxide_cd "${OLDPWD}"
+    elif [[ $# -eq 1 && -d $1 ]]; then
+        __zoxide_cd "$1"
+    elif [[ ${@: -1} == "${__zoxide_z_prefix}"?* ]]; then
+        # shellcheck disable=SC2124
+        \builtin local result="${@: -1}"
+        __zoxide_cd "${result:${#__zoxide_z_prefix}}"
+    else
+        \builtin local result
+        # shellcheck disable=SC2312
+        result="$(\command zoxide query --exclude "$(__zoxide_pwd)" -- "$@")" &&
+            __zoxide_cd "${result}"
+    fi
+}
+
+# Jump to a directory using interactive search.
+function __zoxide_zi() {
+    \builtin local result
+    result="$(\command zoxide query --interactive -- "$@")" && __zoxide_cd "${result}"
+}
+
+# =============================================================================
+#
+# Commands for zoxide. Disable these using --no-cmd.
+#
+
+\builtin unalias z &>/dev/null || \builtin true
+function z() {
+    __zoxide_z "$@"
+}
+
+\builtin unalias zi &>/dev/null || \builtin true
+function zi() {
+    __zoxide_zi "$@"
+}
