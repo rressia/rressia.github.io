@@ -15,7 +15,7 @@
 -fireDM(+ffmpeg) btop(bashtop, pytop c++ 버전), zeal, rust, git
 -cudatext, jedit, tea, qalculate, textosaurus, koodo reader, novelwriter, scrivener
 -milkytracker, qmplay2, open cubic player, mediainfo, uget, tilix, cava
--eza, zoxide, coolreader, thorium, qmplay2, tealdeer, pinta, yt-dlp_linux
+-eza, zoxide, coolreader, thorium, htop, tealdeer, pinta, yt-dlp
 ---
 virtualbox & os
 manjaro, w81(cs6), linuxlite, winxp(hwp,cs4)

@@ -81,11 +81,11 @@ linuxmint 고유문제
 홈폴더 밑에 사용자명으로 폴더 만들어지고 그 하위에 폴더 만들어서 네트워크공유 시 공유 안될 수 있음.
 (사용자명과 홈폴더 밑 사용자명폴더가 이름이 같고 영어가 1순위 언어가 아닐 시 문제 발생하는 듯)
 홈폴더 밑에 따로 루트권한으로 폴더 만들어서 공유설정.
-게스트에서 vboxsf 그룹에 사용자 추가 후 공유폴더 마운트
-sudo usermod -aG vboxsf $(whoami)
-mkdir ~/vbshare
-sudo mount -t vboxsf host_share_folder ~/vbshare
-*나중에 다른 리눅스 배포판을 virtualbox에서 설치할 때 몇몇 배포판의 경우 호스트에서 vboxsf 그룹에 사용자 추가한 후에는 게스트에서 딱히 따로 공유폴더 설정이나 폴더 마운트 안해도 네트워크에서 공유폴더 잘만 됨. 호스트에서 사용자 vboxsf 그룹 추가가 답인 듯. 아니면 virtualbox에서 공유폴더 설정한 것만 접근 가능한 경우도 있다. 검토할 것. 특정배포판에서는 sudo mount -t vboxsf host_share_folder ~/vbshare 만 해도 된다.
+호스트에서 vboxsf 그룹에 사용자 추가 후 게스트에서 공유폴더 마운트
+호스트에서 sudo usermod -aG vboxsf $(whoami)
+게스트에서 mkdir ~/share
+sudo mount -t vboxsf host_share_folder ~/share
+*나중에 다른 리눅스 배포판을 virtualbox에서 설치할 때 몇몇 배포판의 경우 호스트에서 vboxsf 그룹에 사용자 추가한 후에는 게스트에서 딱히 따로 공유폴더 설정이나 폴더 마운트 안해도 네트워크에서 공유폴더 잘만 됨. 호스트에서 사용자 vboxsf 그룹 추가가 답인 듯. 아니면 virtualbox에서 공유폴더 설정한 것만 접근 가능한 경우도 있다. 검토할 것. 특정배포판에서는 sudo mount -t vboxsf host_share_folder ~/share 만 해도 된다.
 ---
 KDE Desktop에서 마우스 휠스크롤 민감도 낮은 문제 -> 설정-내게 필요한 설정-Mouse Navigation-Acceleration delay -> 0
 system settings - workspace behavior - general behavior - animation speed - instant -> 마우스 휠 즉각적인 반응 좀 나아진 것 같은데... 여전히 첫 휠스크롤 반응은 없음. 이 단순한 문제로 kde에 손이 안 감.
@@ -174,8 +174,12 @@ sub-auto="fuzzy"
 sub-codepage="cp949"
 sid="auto"
 slang="kor,ko,jp,jpn,en,eng,und" # kor:embedded,  ko:enternal
+sub-font='리디바탕'
+sub-font-size=40
+sub-color='#aaff7f'
+sub-border-size=2
 ---
-dosbox.conf
+dosbox.conf :
 fullresolution=1920x1080
 windowresolution=1280x720
 output=opengl
@@ -188,4 +192,18 @@ mkdir -p /home/$USER/build_safe/tmp
 export TMPDIR=/home/$USER/build_safe/tmp
 ---
 ~/.bashrc 다시 읽기 : source ~/.bashrc 혹은 . ~/.bashrc
+---
+ln -s [원본파일경로] [링크파일경로]
+---
+sabaki engines
+leela : --gtp
+gnu go : --mode gtp
+---
+unzip '*.zip' (or unzip \*.zip) // 와일드카드 사용
+unzip -O cp949 filename,zip -d directory_name // 국가코드 및 폴더에 풀기
+---
+getconf -a | grep glibc
+ldd --version
+---
+env 전체환경변수
 ---
