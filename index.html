@@ -80,7 +80,33 @@
             letter-spacing: -0.02em; /* 글자 간격을 좁혀 밀도 향상 */
     
         }
-        
+
+		/* 각 섹션(--- 사이의 내용) */
+		.content-section {
+		    padding: 1.5rem 0;
+		}
+		
+		/* 각 단락(빈 줄 사이의 내용) */
+		.content-p {
+		    margin-bottom: 1.5rem;
+		    word-break: break-all;
+		}
+		
+		/* 구분선 스타일 */
+		.section-divider {
+		    border: 0;
+		    height: 1px;
+		    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+		    margin: 2rem 0;
+		}
+		
+		/* 로딩 및 에러 메시지 */
+		.loading, .error {
+		    text-align: center;
+		    color: #9ca3af;
+		    padding: 5rem 0;
+		}        
+		
 		/* 햄버거 버튼 스타일 (기본 숨김) */
 		.hamburger {
 		    display: none;
@@ -145,9 +171,9 @@
 
         <details>
             <summary>Linux & Server</summary>
-            <a class="doc-link" onclick="loadTxt(this, 'tips/linux_tips.txt')">linux_tips</a>
-            <a class="doc-link" onclick="loadTxt(this, 'tips/linuxmint 19.3.txt')">linuxmint 19.3</a>
-            <a class="doc-link" onclick="loadTxt(this, 'tips/linuxmint 21.3.txt')">linuxmint 21.3</a>
+            <a class="doc-link" onclick="loadTxt2(this, 'tips/linux_tips.txt')">linux_tips</a>
+            <a class="doc-link" onclick="loadTxt2(this, 'tips/linuxmint 19.3.txt')">linuxmint 19.3</a>
+            <a class="doc-link" onclick="loadTxt2(this, 'tips/linuxmint 21.3.txt')">linuxmint 21.3</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/lemp')">lemp</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/bash_config_add.txt')">bash_config_add</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/copy and paste.txt')">copy and paste</a>
@@ -209,6 +235,44 @@
             contentDiv.innerText = '에러: ' + err.message;
         }
     }
+    
+	async function loadTxt2(element, fileName) {
+	    // 활성 상태 업데이트
+	    const links = document.querySelectorAll('.doc-link');
+	    links.forEach(l => l.classList.remove('active'));
+	    element.classList.add('active');
+	
+	    const contentDiv = document.getElementById('content');
+	    contentDiv.innerHTML = '<div class="loading">문서를 읽어오는 중...</div>';
+	    
+	    try {
+	        const response = await fetch(fileName);
+	        if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
+	        const text = await response.text();
+	
+	        // 1. 섹션 나누기 (--- 기준)
+	        const sections = text.split('---');
+	        
+	        const htmlResult = sections.map(section => {
+	            // 2. 단락 나누기 (빈 줄 기준)
+	            const paragraphs = section.trim().split(/\n\s*\n/);
+	            
+	            const pTags = paragraphs.map(p => {
+	                if (!p.trim()) return '';
+	                // 줄바꿈을 <br>로 변환하여 본문 생성
+	                return `<p class="content-p">${p.trim().replace(/\n/g, '<br>')}</p>`;
+	            }).join('');
+	
+	            return `<section class="content-section">${pTags}</section>`;
+	        }).join('<hr class="section-divider">');
+	
+	        contentDiv.innerHTML = htmlResult;
+	        contentDiv.scrollTop = 0;
+	
+	    } catch (err) {
+	        contentDiv.innerHTML = `<div class="error">에러: ${err.message}</div>`;
+	    }
+	}
 
     // 간단한 검색 기능
     function filterDocs() {
