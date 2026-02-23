@@ -207,3 +207,14 @@ ldd --version
 ---
 env 전체환경변수
 ---
+rofi
+sudo apt install rofi
+mkdir -p ~/.config/rofi
+rofi -dump-config > ~/.config/rofi/config.rasi
+	modi: "drun,run,window";
+전역단축키 등록 : rofi -show drun
+---
+calibre 글꼴 강제 지정
+환경설정 - 스타일 :
+	* { font-family: "나눔명조", "NanumMyeongjo", "Pretendard", "리디바탕", serif !important; }
+	body { line-height: 1.7 !important; word-break: keep-all !important; }

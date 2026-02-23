@@ -23,7 +23,7 @@ nvidia 470 driver
 ibus-setup / 한국어 - Hangul 남기고 나머지 삭제
 
 sudo apt install
-focuswriter geany ranger audacious synapse goldendict guake ncdu duf bluefish
+focuswriter geany ranger audacious synapse->rofi goldendict guake ncdu duf bluefish
 meld micro cmus gimagereader tesseract-ocr-kor uget zoxide htop yt-dlp dosbox mcomix
 featherpad gedit mpv font-manager vsftpd ffmpeg
 
@@ -132,7 +132,7 @@ soase같은 구형 32bit게임은 "32비트 환경 + 필수 런타임 + OpenGL" 
 wine 폴더경로+파일명 으로 메뉴등록하고 실행 안되는 프로그램은 (특히 게임)
 wine start /d "폴더경로" "파일명.exe"
 
-epub : foliate->koodoreader->thorium->calibre->coolreader
+epub : foliate->koodoreader->thorium->calibre->coolreader->mupdf
 novel : focuswriter->scrivener->novelwriter->obsidian->focuswriter
 
 coolreader
@@ -140,3 +140,8 @@ background clolr #fffdf6
 
 focuswriter
 리디바탕 12 / 노트 설정 - 너비 700 / 창과의 거리 15 / 노트와 글자와의 거리 15 / 탭 너비 16 / 한 줄 들여쓰기
+
+카카오톡 잘 설치됨. 파일 전송도 잘 됨.
+
+*epub viewer에서 좀 헤맸는데(어떤 앱은 실행 잘 안되고 어떤 앱은 잘 안깔리고 어떤 앱은 기능이나 속도가 맘에 안들고 등등)
+일반사용은 mupdf, 장시간 보기에는 koodo reader, calibre(stylesheet 설정)
