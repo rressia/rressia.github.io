@@ -36,3 +36,11 @@ cmus
 	프로세스 > 파일 / 프로세스 < 파일
 파이프(pipe)
 	프로세스 | 프로세스
+mupdf
+	+, - : zoom
+	,, . : page move
+	g, G : first, last page
+	Z : zoom page to fit width, height of window
+	w : shrink window to fit the page
+	C : color/gray bk color
+	I : normal/inverted bk color

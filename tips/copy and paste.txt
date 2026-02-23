@@ -7,7 +7,28 @@ abcdefghijklmnopqrstuvwxyz
 1234567890.:,;(*!?')
 다람쥐 헌 쳇바퀴에 타고파
 키스의 고유 조건은 입술끼리 만나야 하고 특별한 기술은 필요치 않다. 
+찦차를 타고온 펲시맨과 쑛다리 똠방각하
 いろはにほへど / ちりぬるを / わがよたれぞ / つねならむ / うゐのおくやま / けふこえて / あさきゆめみじ / ゑひもせず
 我能吞下玻璃而不伤身体。中国智造，慧及全球
 我能吞下玻璃而不傷身體。微風迎客，軟語伴茶
+
+# calibre stylesheet
+/* 1. 일단 모든 텍스트를 '명조'로 기본 설정 (바탕체 계열) */
+* {
+    font-family: "리디바탕", "RIDIBatang", "함초롬바탕", "Hamchorom Batang", "나눔명조", "NanumMyeongjo", serif !important;
+}
+/* 2. 그중에서 고딕(제목/강조)이어야 하는 태그만 '고딕'으로 다시 강제 지정 */
+h1, h2, h3, h4, h5, h6, b, strong, th, optgroup, .sans-serif, [style*="sans-serif"] {
+    font-family: "함초롬돋움", "Hamchorom Dotum", "나눔고딕", "NanumGothic", "Pretendard", sans-serif !important;
+}
+/* 3. 그중에서 고정폭(코드/인용)이어야 하는 태그만 '고정폭'으로 다시 강제 지정 */
+code, pre, kbd, samp, var, .monospace, [style*="monospace"] {
+    font-family: "Noto Sans Mono CJK KR", "IBM Plex Mono", "D2Coding", "나눔고딕코딩", monospace !important;
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+/* 가독성 공통 설정 */
+body {
+    line-height: 1.7 !important;
+    word-break: keep-all !important;
+}
 
