@@ -111,7 +111,7 @@ find . -name '*sample*' -delete
 코딩용글꼴
 	밝은바탕 	: Office Code Pro, IBM Plex Mono
 	어두운바탕	: Cascadia Code 
-	기타 : Intel One Mono
+	기타 : Intel One Mono, Monaspace Neon
 ---
 .bashrc
 export PATH=$PATH:/home/username/addpathname
@@ -188,8 +188,10 @@ cargo 빌드 시 루트파티션 용량 부족 문제
 컴파일러(rustc)와 링커는 빌드 도중 수많은 임시 파일(.o, .a, .tmp)을 시스템의 기본 임시 디렉토리인 /tmp에 생성합니다.
 # /home 파티션 내의 넉넉한 공간에 폴더 생성
 mkdir -p /home/$USER/build_safe/tmp
-# 환경 변수 설정
+# 환경 변수 설정 (.bashrc)
 export TMPDIR=/home/$USER/build_safe/tmp
+# 타겟 경로 옮기기 (.bashrc) - 위 tmp로 해도 용량이 부족해지는 경우
+export CARGO_TARGET_DIR="/home/$USER/tmp/RustTarget"
 ---
 ~/.bashrc 다시 읽기 : source ~/.bashrc 혹은 . ~/.bashrc
 ---
@@ -218,3 +220,7 @@ calibre 글꼴 강제 지정
 환경설정 - 스타일 :
 	* { font-family: "나눔명조", "NanumMyeongjo", "Pretendard", "리디바탕", serif !important; }
 	body { line-height: 1.7 !important; word-break: keep-all !important; }
+---
+litexl
+폰트 설정 시 한글 들어있는 폰트를 두번째로 하면 한글 입출력 해결됨
+---

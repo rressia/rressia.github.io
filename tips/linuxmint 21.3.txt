@@ -24,13 +24,13 @@ ibus-setup / 한국어 - Hangul 남기고 나머지 삭제
 
 sudo apt install
 focuswriter geany ranger audacious synapse->rofi goldendict guake ncdu duf bluefish
-meld micro cmus gimagereader tesseract-ocr-kor uget zoxide htop yt-dlp dosbox mcomix
-featherpad gedit mpv font-manager vsftpd ffmpeg
+meld micro cmus gimagereader tesseract-ocr-kor uget htop yt-dlp dosbox mcomix
+featherpad l3afpad gedit mpv font-manager vsftpd ffmpeg build-essential
 
 .bashrc에 alias, path, zoxide 관련코드 추가
 
 패키지 설치 & 개별 설치
-chrome vivaldi
+chrome vivaldi rust, 이하 설치
 
 cudatext :
 open translation.ko_KR.zip & select translation
@@ -42,6 +42,12 @@ echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable
 sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
 sudo apt update
 sudo apt install -y eza
+
+zoxide :
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+.bashrc add : 
+eval "$(zoxide init bash)"
+export PATH=$PATH:~/.local/bin
 
 virtualbox :
 sudo apt install libxcb-cursor0
@@ -83,7 +89,7 @@ sudo apt install --install-recommends winehq-stable
 appimage & 개별 프로그램 등록
 gimp inkscape krita mypaint pinta scribus onlyoffice vlc smplayer marktext typora sublime_text
 sabaki qalculate textosaurus koodoreader nightpdf novelwriter obsidian pdfstudioviewer
-deadbeef qmplay2 smplayer vlc rustdesk hyper coolreader
+deadbeef qmplay2 smplayer vlc rustdesk hyper coolreader musikcube vscode
 
 루트(/)용량이 부족할 때 1(home은 다른 파티션) : tmp 설정
 .profile에
@@ -145,3 +151,6 @@ focuswriter
 
 *epub viewer에서 좀 헤맸는데(어떤 앱은 실행 잘 안되고 어떤 앱은 잘 안깔리고 어떤 앱은 기능이나 속도가 맘에 안들고 등등)
 일반사용은 mupdf, 장시간 보기에는 koodo reader, calibre(stylesheet 설정)
+
+minetest
+ln -s previous_home/.minetest present_home/.minetest

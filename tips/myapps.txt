@@ -1,0 +1,46 @@
+wine
+winehq, 반디집, 꿀뷰, 이지뷰어, SumatraPDF
+Counter Strike, SOASE
+
+개발
+bluefish, CudaText, micro, geany, meld, sublime_text, typora
+dbeaver-ce, dbgate, jedit, mrcode, pulsar, pycharm, visual studio code, cpeditor, marktext
+rust, build-essential
+
+게임
+아일라이트솔리테어, 지뢰찾기, gzdoom, minetst(->luanti), sabaki, dosbox emulator
+
+그래픽
+gimp, inkscape, krita, pinta, mypaint, mcomix, gimagereader(+tesseract-ocr and data)
+
+교육
+goldendict(+사전 설정: 영영사전: American Heritage, Cambridge Advanced Learners, Macmillan English, Oxford Advanced Learner's, Oxford English, Webster's Third New International)
+
+보조프로그램
+synapse->rofi, gedit, featherpad, l3afpad, font manager, qalculate, textosaurus
+
+오피스
+focuswriter, koodo reader, novelwriter, onlyoffice, pdf studio viewer, cool reader, mupdf, calibre
+
+음악과 비디오
+audacious, deadbeef, mpv, qmplay2, smplayer, vlc, ffmpeg
+
+인터넷
+chrome, vivaldi, uget, rustdesk, vsftpd
+
+관리
+guake, hyper, htop, ranger, virtualbox, ibus-hangul
+
+etc
+ncdu, duf, eza, zoxide, vsftpd, cmus, yt-dlp
+
+---
+
+gnome terminal, guake : Cascadia Code 10
+geany, sublime_text : Intel One Mono 10
+cudatext : Dejavu Sans Mono 9
+bluefish : Camingo Code Bold 10
+gedit : IBM Plex Mono Medium 11
+xed : Office Code Pro Medium 10
+featherpad : Monaspace Neon 10
+l3afpad : Office Code Pro 11
