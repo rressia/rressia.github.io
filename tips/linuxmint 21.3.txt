@@ -91,6 +91,14 @@ gimp inkscape krita mypaint pinta scribus onlyoffice vlc smplayer marktext typor
 sabaki qalculate textosaurus koodoreader nightpdf novelwriter obsidian pdfstudioviewer
 deadbeef qmplay2 smplayer vlc rustdesk hyper coolreader musikcube vscode
 
+fonts : (~/.local/share/fonts)
+Alegreya, Alegreya Sans, Merriweather, Merriweather Sans, Roboto Slab, Savate
+CamingoCode, Cascadia Code, IBM Plex Mono, Intel One Mono, Monaco
+Monappace Argon, Monaspace Neon, Office Code Pro, PT Mono
+고운 바탕, 고운 돋움, G마켓 산스, KoPubWorld돋움체, KoPubWorld바탕체, 나눔바른고딕, 나눔스퀘어, 리디바탕, 마루부리
+서울남산체, 서울한강체, 을유1945, 이롭게 바탕체, 제주고딕, 제주명조, 제주한라산, 함초롬돋움, 함초롬바탕
+Min Sans, Pretendard, 구름 산스, 구름 산스 코드, SUITE, Cafe24 DangDanghae, 유앤피플 고딕 UNI
+
 루트(/)용량이 부족할 때 1(home은 다른 파티션) : tmp 설정
 .profile에
 sudo mkdir /home/tmp
@@ -154,3 +162,14 @@ focuswriter
 
 minetest
 ln -s previous_home/.minetest present_home/.minetest
+
+추가 01
+viewmd_0.1.2_amd64.deb FBReader_Book_Reader-x86_64-2.1.4.AppImage dbeaver 
+
+추가 02
+font manager의 sources 활용 - 메인글꼴 이외의 추가글꼴을 시스템에 깔지 않고 임시로 활성화/비활성화 (~/.local/share/fonts2)
+->sources 활성화가 저장되지 않고 비활성화 상태로 돌아감. 추가글꼴 필요한 상황에서 그때그때 활성화.
+Andika, Arvo, BioRhyme, Bitter, Exo2, Gentinum Plus, LibertinusSans, LibertinusSerif, Montserrat, Open Sans, Outfit
+카페24 글꼴 - Danjunghae Ohsquare PROSlim Supermagic, 경기도체
+
+https://holidays.hyunbin.page/ 에서 대한민국 공휴일 정보 가져와 ics 클릭해서 달력 앱에 import
