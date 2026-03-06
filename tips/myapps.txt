@@ -23,7 +23,7 @@ synapse->rofi, gedit, featherpad, l3afpad, font manager, qalculate, textosaurus
 focuswriter, koodo reader, novelwriter, onlyoffice, pdf studio viewer, cool reader, mupdf, calibre
 
 음악과 비디오
-audacious, deadbeef, mpv, qmplay2, smplayer, vlc, ffmpeg
+audacious, deadbeef, mpv, qmplay2, smplayer, vlc, ffmpeg, sayonara
 
 인터넷
 chrome, vivaldi, uget, rustdesk, vsftpd
@@ -44,3 +44,9 @@ gedit : IBM Plex Mono Medium 11
 xed : Office Code Pro Medium 10
 featherpad : Monaspace Neon 10
 l3afpad : Office Code Pro 11
+
+제미나이 : 문제해결 보통
+퍼플렉시티 : 문제해결 보통
+그록 : 자주 먹통
+클로버 x : 문제해결 낮음
+챗gpt : 문제해결 좋음

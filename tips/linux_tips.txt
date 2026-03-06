@@ -224,3 +224,5 @@ calibre 글꼴 강제 지정
 litexl
 폰트 설정 시 한글 들어있는 폰트를 두번째로 하면 한글 입출력 해결됨
 ---
+AppImage : --xdg-install --xdg-remove
+---

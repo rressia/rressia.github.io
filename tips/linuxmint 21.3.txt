@@ -89,7 +89,7 @@ sudo apt install --install-recommends winehq-stable
 appimage & 개별 프로그램 등록
 gimp inkscape krita mypaint pinta scribus onlyoffice vlc smplayer marktext typora sublime_text
 sabaki qalculate textosaurus koodoreader nightpdf novelwriter obsidian pdfstudioviewer
-deadbeef qmplay2 smplayer vlc rustdesk hyper coolreader musikcube vscode
+deadbeef qmplay2 smplayer vlc rustdesk hyper coolreader musikcube vscode sayonara
 
 fonts : (~/.local/share/fonts)
 Alegreya, Alegreya Sans, Merriweather, Merriweather Sans, Roboto Slab, Savate
@@ -148,6 +148,7 @@ wine start /d "폴더경로" "파일명.exe"
 
 epub : foliate->koodoreader->thorium->calibre->coolreader->mupdf
 novel : focuswriter->scrivener->novelwriter->obsidian->focuswriter
+music : audacious->musikcube->deadbeef->sayonara(직관적인 인터페이스, 가벼움, 스펙트럼, 가사, 인터넷라디오) and cliamp(cli app, visualizer)
 
 coolreader
 background clolr #fffdf6
