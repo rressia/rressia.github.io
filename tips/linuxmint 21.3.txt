@@ -117,23 +117,32 @@ sudo mv /opt/wine-stable /opt/wine-stable_backup
 sudo ln -s /home/wine-stable /opt/wine-stable
 # 4. 작동 확인 후 백업 삭제
 sudo rm -rf /opt/wine-stable_backup
+-> 아래 바인드 마운트 /opt에 통합할 지 고려
 
 루트(/)용량이 부족할 때 3(home은 다른 파티션) : Bind Mount 활용
-# 플랫팩 중단 확인 후 복사 (권한 보존을 위해 -a 사용)
-sudo cp -av /var/lib/flatpak /mnt/data/
+# 플랫팩 중단 확인 후 복사 (메타데이터, ACL, xattr 보존을 위해 -aAXv 사용)
+sudo mkdir -p /home/data/flatpak
+sudo rsync -aAXv /var/lib/flatpak/ /home/data/flatpak/
 # 기존 폴더 백업 후 비우기
 sudo mv /var/lib/flatpak /var/lib/flatpak_bak
 sudo mkdir /var/lib/flatpak
 # 임시 마운트 테스트
-sudo mount --bind /mnt/data/flatpak /var/lib/flatpak
+sudo mount --bind /home/data/flatpak /var/lib/flatpak
 sudo systemctl start flatpak-system-helper.service
 # 부팅 시 자동 적용 (/etc/fstab 수정)
-/mnt/data/flatpak  /var/lib/flatpak  none  bind  0  0
+/home/data/flatpak  /var/lib/flatpak  none  bind  0  0
 
 # 플랫팩 중단 작업
 flatpak ps
 flatpak kill <ID 또는 이름>
 sudo systemctl stop flatpak-system-helper.service
+
+# 필요시 다른 것도 작업
+/var/lib/docker   → /home/data/docker
+/opt              → /home/data/opt
+fstab :
+/home/data/docker   /var/lib/docker   none  bind  0 0
+/home/data/opt      /opt              none  bind  0 0
 
 wine 32bit app & game 실행시 에러 (app는 실행되나 game은 실행 실패 - 게임은 vulkan이 필수이기 때문) :
 sudo apt install libvulkan1:i386 mesa-vulkan-drivers:i386
@@ -148,7 +157,7 @@ wine start /d "폴더경로" "파일명.exe"
 
 epub : foliate->koodoreader->thorium->calibre->coolreader->mupdf
 novel : focuswriter->scrivener->novelwriter->obsidian->focuswriter
-music : audacious->musikcube->deadbeef->sayonara(직관적인 인터페이스, 가벼움, 스펙트럼, 가사, 인터넷라디오) and cliamp(cli app, visualizer)
+music : audacious->musikcube->deadbeef(앨범아트버그)<->sayonara(곡정보관련오류)
 
 coolreader
 background clolr #fffdf6
