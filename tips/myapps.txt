@@ -8,7 +8,7 @@ dbeaver-ce, dbgate, jedit, mrcode, pulsar, pycharm, visual studio code, cpeditor
 rust, build-essential
 
 게임
-아일라이트솔리테어, 지뢰찾기, gzdoom, minetst(->luanti), sabaki, dosbox emulator
+아일라이트솔리테어, 지뢰찾기, gzdoom->uzdoom, minetst(->luanti), sabaki, dosbox emulator
 
 그래픽
 gimp, inkscape, krita, pinta, mypaint, mcomix, gimagereader(+tesseract-ocr and data)
@@ -49,4 +49,4 @@ l3afpad : Office Code Pro 11
 퍼플렉시티 : 문제해결 보통
 그록 : 자주 먹통
 클로버 x : 문제해결 낮음
-챗gpt : 문제해결 좋음
+챗gpt : 문제해결 좋음, 답변이 좀 느린 편

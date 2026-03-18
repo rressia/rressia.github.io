@@ -25,12 +25,12 @@ ibus-setup / 한국어 - Hangul 남기고 나머지 삭제
 sudo apt install
 focuswriter geany ranger audacious synapse->rofi goldendict guake ncdu duf bluefish
 meld micro cmus gimagereader tesseract-ocr-kor uget htop yt-dlp dosbox mcomix
-featherpad l3afpad gedit mpv font-manager vsftpd ffmpeg build-essential
+featherpad l3afpad gedit mpv font-manager vsftpd ffmpeg build-essential fd-find bat
 
 .bashrc에 alias, path, zoxide 관련코드 추가
 
 패키지 설치 & 개별 설치
-chrome vivaldi rust, 이하 설치
+chrome vivaldi rust, 이하 설치 및 설정
 
 cudatext :
 open translation.ko_KR.zip & select translation
@@ -48,6 +48,14 @@ curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh 
 .bashrc add : 
 eval "$(zoxide init bash)"
 export PATH=$PATH:~/.local/bin
+
+fd :
+sudo apt install fd-find
+ln -s $(which fdfind) ~/.local/bin/fd
+
+bat :
+sudo apt install bat
+ln -s $(which batcat) ~/.local/bin/bat
 
 virtualbox :
 sudo apt install libxcb-cursor0
@@ -183,3 +191,4 @@ Andika, Arvo, BioRhyme, Bitter, Exo2, Gentinum Plus, LibertinusSans, LibertinusS
 카페24 글꼴 - Danjunghae Ohsquare PROSlim Supermagic, 경기도체
 
 https://holidays.hyunbin.page/ 에서 대한민국 공휴일 정보 가져와 ics 클릭해서 달력 앱에 import
+
