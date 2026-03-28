@@ -141,6 +141,7 @@
             <a class="doc-link" onclick="loadTxt(this, 'tips/rust.txt')">rust</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/css')">css</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/html')">html</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/markdown.md')">markdown</a>
         </details>
 
         <details>
@@ -148,17 +149,19 @@
             <a class="doc-link" onclick="loadTxt(this, 'tips/linux_tips.txt')">linux_tips</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/linuxmint 19.3.txt')">linuxmint 19.3</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/linuxmint 21.3.txt')">linuxmint 21.3</a>
-            <a class="doc-link" onclick="loadTxt(this, 'tips/lemp')">lemp</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/bash_config_add.txt')">bash_config_add</a>
             <a class="doc-link" onclick="loadTxt(this, 'tips/copy and paste.txt')">copy and paste</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/app_shortcut')">app_shortcut</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/yt-dlp')">yt-dlp</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/lemp')">lemp</a>
         </details>
 
         <details>
             <summary>Others</summary>
             <a class="doc-link" onclick="loadTxt(this, 'tips/ai.txt')">ai</a>
-            <a class="doc-link" onclick="loadTxt(this, 'tips/yt-dlp')">yt-dlp</a>
-            <a class="doc-link" onclick="loadTxt(this, 'tips/app_shortcut')">app_shortcut</a>
-            <a class="doc-link" onclick="loadTxt(this, 'tips/markdown.md')">markdown</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/물리.txt')">물리</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/전자기파의 스펙트럼.png')">전자기파의 스펙트럼</a>
+            <a class="doc-link" onclick="loadTxt(this, 'tips/wordstory_main.png')">wordstory</a>
         </details>
     </div>
     
@@ -198,16 +201,31 @@
         element.classList.add('active');
 
         const contentDiv = document.getElementById('content');
-        contentDiv.innerText = '불러오는 중...';
+        contentDiv.innerHTML = '불러오는 중...';
         
         try {
             const response = await fetch(fileName);
             if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
-            const text = await response.text();
-            contentDiv.innerText = text;
+            
+            // 파일 확장자 확인
+            const ext = fileName.toLowerCase().split('.').pop();
+            const imageExts = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+            
+            if (imageExts.includes(ext)) {
+                // 이미지 파일 표시
+                contentDiv.style.display = 'flex';
+                contentDiv.style.alignItems = 'center';
+                contentDiv.style.justifyContent = 'center';
+                contentDiv.innerHTML = `<img src="${fileName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">`;
+            } else {
+                // 텍스트 파일 표시
+                contentDiv.style.display = 'block';
+                const text = await response.text();
+                contentDiv.innerText = text;
+            }
             contentDiv.scrollTop = 0; // 새 문서 로드 시 스크롤 상단으로
         } catch (err) {
-            contentDiv.innerText = '에러: ' + err.message;
+            contentDiv.innerHTML = '에러: ' + err.message;
         }
     }
     
