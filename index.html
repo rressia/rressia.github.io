@@ -81,6 +81,16 @@
             letter-spacing: -0.02em; /* 글자 간격을 좁혀 밀도 향상 */
         }
 
+        /* 이미지 스타일 */
+        #content img {
+            transition: transform 0.2s ease;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        #content img:hover {
+            transform: scale(1.05);
+        }
+
 		/* 햄버거 버튼 스타일 (기본 숨김) */
 		.hamburger {
 		    display: none;
@@ -216,7 +226,7 @@
                 contentDiv.style.display = 'flex';
                 contentDiv.style.alignItems = 'center';
                 contentDiv.style.justifyContent = 'center';
-                contentDiv.innerHTML = `<img src="${fileName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">`;
+                contentDiv.innerHTML = `<img src="${fileName}" style="max-width: 100%; max-height: 100%; object-fit: contain; cursor: pointer;" onclick="window.open('${fileName}', '_blank')" title="클릭하여 새 창에서 크게 보기">`;
             } else {
                 // 텍스트 파일 표시
                 contentDiv.style.display = 'block';
