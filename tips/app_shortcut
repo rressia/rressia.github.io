@@ -17,6 +17,7 @@ micro
 	cut-line, duplicate-line : ^K, ^D
 	autocompletion : tab
 	selection-move : Alt+ArrowKey
+	replace : ^E, replace ... ... / replace "..." "..."
 cinnamon
 	작업공간이동 : Ctrl+Alt+Left/Right
 	창-작업공간이동 : Shift+Ctrl+Alt+Left/Right
@@ -37,10 +38,23 @@ cmus
 파이프(pipe)
 	프로세스 | 프로세스
 mupdf
-	+, - : zoom
-	,, . : page move
+	+, - : zoom			Z : zoom page to window		z : reset zoom level
+	,, . : page move	숫자g : 페이지이동		m(ark-t,T이동) 	숫자m,숫자t : 위치저장,이동
 	g, G : first, last page
-	Z : zoom page to fit width, height of window
 	w : shrink window to fit the page
-	C : color/gray bk color
+	C : color/gray bk color		c : tinting
 	I : normal/inverted bk color
+nnn
+	1-8 : context		Tab : cycle/new context
+	B : bookmark		b : select bookmark
+	. : toggle hidden	d : detail mode toggle	f : file details
+	n : create			^R : rename				x ^X : delete
+	space : select (a : select all)				p : copy here	v : move here
+	t : sort - s(ize) t(ime) c(lear) r(everse)	^T : cycle size-name-time
+	s : manage session	o : open with...
+	~ : home  			` : root  			! : shell		= : launch  
+	/ : filter			nnn -s session_name		~Q : quit all context
+zellij
+	^P : panel	^T : tab	^N : size	^H : move	^O : session
+	@N : new	@f : float	@ArrowKey : move focus
+	zellij a session_name	^Q : quit	^G : lock (다른 앱과 단축키 충돌시 사용)

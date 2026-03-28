@@ -169,7 +169,7 @@ gui start : systemctl set-default graphical.target (cli : multi-user.target)
 ifconfig -> ip a / ip addr
 ---
 vlc : 선호하는 자막 언어 KOR 아니면 KO
-mpv.conf : 
+~/.config/mpv/mpv.conf : 
 sub-auto="fuzzy"
 sub-codepage="cp949"
 sid="auto"
@@ -182,7 +182,7 @@ sub-shadow-offset=1.5
 sub-shadow-color="#33000000"
 sub-blur=0.5
 ---
-dosbox.conf :
+~/.dosbox/dosbox-xxx.conf :
 fullresolution=1920x1080
 windowresolution=1280x720
 output=opengl
@@ -228,4 +228,37 @@ litexl
 폰트 설정 시 한글 들어있는 폰트를 두번째로 하면 한글 입출력 해결됨
 ---
 AppImage : --xdg-install --xdg-remove
+---
+jobs: 일시 정지된 프로세스 목록 및 번호 확인.
+fg %<번호>: 정지된 작업을 포그라운드로 복귀.
+bg %<번호>: 정지된 작업을 백그라운드에서 다시 실행.
+---
+~/.local/share/nemo/actions/run_in_terminal.nemo_action
+[Nemo Action]
+Active=true
+Name=터미널에서 실행(_E)
+Comment=선택한 파일을 터미널에서 실행합니다.
+Exec=gnome-terminal --working-directory=%P -- /bin/bash -c './%f; echo; echo "--------------------------"; read -p "종료하려면 엔터를 누르세요..."'
+Selection=s
+Mimetypes=application/x-executable;application/x-shellscript;text/x-python;
+Icon-Name=utilities-terminal
+---
+~/.local/share/nemo/actions/ffprobe.nemo_action
+[Nemo Action]
+Name=미디어 정보 보기 (ffprobe)
+Comment=Video / Audio 요약
+Exec=bash -c 'V=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,r_frame_rate -of default=nw=1:nk=1 "$1"); A=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name,sample_rate,channels -of default=nw=1:nk=1 "$1"); VC=$(echo "$V" | sed -n 1p); VW=$(echo "$V" | sed -n 2p); VH=$(echo "$V" | sed -n 3p); VF=$(echo "$V" | sed -n 4p | awk -F/ "{print \$1/\$2}"); AC=$(echo "$A" | sed -n 1p); AR=$(echo "$A" | sed -n 2p); ACH=$(echo "$A" | sed -n 3p); zenity --info --title="미디어 요약" --text="🎬 Video: ${VC} • ${VW}x${VH} • ${VF} fps\n🔊 Audio: ${AC} • ${AR} Hz • ${ACH} ch"' _ %F
+Icon-Name=dialog-information
+Selection=s
+Extensions=mp4;mkv;avi;mov;flv;webm;wmv;
+---
+ibus 특수문자 및 이모지
+Ctrl + Shift + u, 유니코드 숫자, enter : 리눅스 특수문자 입력
+00b7: · 22ef: ⋯ 2192: → 203b: ※ 00d7: × 25cb: ○ 25cf: ● 25b6: ▶ 25aa: ▪ 2630: ☰
+Ctrl + semicolon(period), space : 이모지 선택창 팝업
+Ctrl + semicolon(period), 이모지 이름, space, space : 해당 이모지 종류 선택창 팝업
+Ctrl + semicolon(period), 이모지 이름, space, enter : 해당 이모지 입력
+---
+zellij ~/.config/config.kdl
+simplified_ui true
 ---

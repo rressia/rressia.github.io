@@ -10,14 +10,20 @@ alias ㄱ='ranger'
 alias m='micro'
 alias ㅡ='micro'
 alias ㅋ='z'
-alias n='nvim-linux-x86_64.appimage'
+alias n='/home/miro3/.local/bin/nnn-emoji-static'
+alias ㅜ='/home/miro3/.local/bin/nnn-emoji-static'
+alias nv='nvim-linux-x86_64.appimage'
+alias rustcc='rustc -C opt-level=z -C lto -C strip=symbols'
+alias hx='/home/apps/helix/helix-25.07.1-x86_64-linux/hx'
+alias zz='/home/apps/zellij'
+alias ㅋㅋ='/home/apps/zellij'
+
 alias ydh='echo "ydd : 영상+자막 다운로드,  -f ID 필요";echo "ydw : webm+opus 다운로드";echo "yda : avc+mp4a 다운로드";echo "yds : 자막만 다운로드";echo "ydf : 다운로드 가능한 목록"'
 alias ydd='yt-dlp_linux -o "~/비디오/yt-dlp/%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en'
 alias ydw='yt-dlp_linux -f 248+251 -o "~/비디오/yt-dlp/%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en'
 alias yda='yt-dlp_linux -f 137+140 -o "~/비디오/yt-dlp/%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en'
 alias yds='yt-dlp_linux --skip-download -o "~/비디오/yt-dlp/%(title)s.%(ext)s" --write-subs --sub-format srt --sub-langs ko,en'
 alias ydf='yt-dlp_linux -F'
-alias rustcc='rustc -C opt-level=z -C lto -C strip=symbols'
 
 export PATH=$PATH:/home/apps;~/.local/bin:~/다운로드
 
@@ -31,3 +37,20 @@ export TMP="/home/tmp"
 export TEMP="/home/tmp"
 # 위 tmp 변경해도 용량이 부족해지는 경우(rust)
 #export CARGO_TARGET_DIR="/home/tmp/rust_target"
+
+# less가 ANSI 컬러를 표시하도록
+export LESS='-R'
+
+# man 페이지 컬러 설정
+export LESS_TERMCAP_mb=$'\e[1;31m'      # blink → 빨강
+export LESS_TERMCAP_md=$'\e[1;38;5;39m' # bold → 파랑 (섹션 제목)
+export LESS_TERMCAP_me=$'\e[0m'
+
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[48;5;236;38;5;220m' # 강조 → 회색 배경 + 노랑
+export LESS_TERMCAP_ue=$'\e[0m'
+
+export LESS_TERMCAP_us=$'\e[1;38;5;82m' # 밑줄 → 초록 (옵션/변수)
+
+# man이 less를 제대로 쓰도록 (안전)
+export MANPAGER="less -R"
