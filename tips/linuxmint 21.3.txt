@@ -2,9 +2,15 @@
 
 ibus-hangul 설치
 ibus-setup / Hangul 추가, 나머지 삭제 / 시스템 설정 / 키보드 / 한국어(Hangul) 추가, 나머지 삭제
+-> 개별 프로그램별 한/영 입력상태 유지가 안 됨. fcitx5로 갈아탐.
+sudo apt install fcitx5 fcitx5-hangul fcitx5-config-qt fcitx5-frontend-gtk2 fcitx5-frontend-gtk3 fcitx5-frontend-gtk4 fcitx5-frontend-qt5 fcitx5-frontend-qt6
+시스템 설정 - 한글 입력 - 입력기 프레임 워크 : fcitx5
+fcitx5에서 한글입력 안되는 앱 : textosaurus, novelwriter
+원래 한글입력 안되는 앱 : inkscape, scribus, qmplay2...(qt5 appimage)
 
 textosaurus
-monokai neo theme. 한글입력 됨.
+monokai neo theme. ibus 한글입력 됨.
+fcitx5 한글입력 안됨.
 
 nvidia 470 driver를 설치하려고 시스템을 몇 번 갈아치움. 결국 안돼서 xserver-xorg-video-nouveau 씀.
 인터넷 서핑 결과 linuxmint 21.3까지 gtx 650이 된다고는 나왔음.
@@ -20,7 +26,8 @@ nvidia 470 driver
 업데이트 매니저 - 소프트웨어 소스 변경 - 업데이트 설치
 시스템 설정 이것저것 만지기, 애플릿, 확장프로그램
 
-ibus-setup / 한국어 - Hangul 남기고 나머지 삭제
+ibus-setup (ibus, ibus-hangul) / 한국어 - Hangul 남기고 나머지 삭제
+(or fcitx5, fcitx5-hangul)(or kime 설치)
 
 sudo apt install
 focuswriter geany ranger audacious synapse->rofi goldendict guake ncdu duf bluefish
@@ -115,42 +122,47 @@ export TMPDIR=/home/tmp
 export TMP=/home/tmp
 export TEMP=/home/tmp
 
-루트(/)용량이 부족할 때 2(home은 다른 파티션) : wine lib 옮기기
+루트(/)용량이 부족할 때 2(home은 다른 파티션) : 심볼릭 링크 이용하기
 # 1. 대상 폴더를 다른 파티션으로 복사 (권한 유지 -p)
-sudo cp -rp /opt/wine-stable /home/
+sudo cp -rp /target_folder /home/
 # 2. 기존 폴더 이름 변경 (만약의 사태를 대비한 백업)
-sudo mv /opt/wine-stable /opt/wine-stable_backup
+sudo mv /target_folder /target_folder_bak
 # 3. 심볼릭 링크 생성
 # ln -s [실제 데이터 위치] [원래 연결될 경로]
-sudo ln -s /home/wine-stable /opt/wine-stable
+sudo ln -s /home/target_folder /target_folder
 # 4. 작동 확인 후 백업 삭제
-sudo rm -rf /opt/wine-stable_backup
--> 아래 바인드 마운트 /opt에 통합할 지 고려
+sudo rm -rf /target_folder_bak
 
 루트(/)용량이 부족할 때 3(home은 다른 파티션) : Bind Mount 활용
 # 플랫팩 중단 확인 후 복사 (메타데이터, ACL, xattr 보존을 위해 -aAXv 사용)
+	# 플랫팩 중단 작업
+	flatpak ps
+	flatpak kill <ID 또는 이름>
+	sudo systemctl stop flatpak-system-helper.service
 sudo mkdir -p /home/data/flatpak
+sudo mkdir -p /home/data/opt
 sudo rsync -aAXv /var/lib/flatpak/ /home/data/flatpak/
+sudo rsync -aAXv /opt/ /home/data/opt/
 # 기존 폴더 백업 후 비우기
 sudo mv /var/lib/flatpak /var/lib/flatpak_bak
+sudo mv /opt /opt_bak
 sudo mkdir /var/lib/flatpak
+sudo mkdir /opt
 # 임시 마운트 테스트
 sudo mount --bind /home/data/flatpak /var/lib/flatpak
 sudo systemctl start flatpak-system-helper.service
+sudo mount --bind /home/data/opt /opt
 # 부팅 시 자동 적용 (/etc/fstab 수정)
 /home/data/flatpak  /var/lib/flatpak  none  bind  0  0
-
-# 플랫팩 중단 작업
-flatpak ps
-flatpak kill <ID 또는 이름>
-sudo systemctl stop flatpak-system-helper.service
+/home/data/opt      /opt              none  bind  0  0
+# 백업 삭제
+sudo rm -rf /var/lib/flatpak_bak
+sudo rm -rf /opt_bak
 
 # 필요시 다른 것도 작업
 /var/lib/docker   → /home/data/docker
-/opt              → /home/data/opt
 fstab :
 /home/data/docker   /var/lib/docker   none  bind  0 0
-/home/data/opt      /opt              none  bind  0 0
 
 wine 32bit app & game 실행시 에러 (app는 실행되나 game은 실행 실패 - 게임은 vulkan이 필수이기 때문) :
 sudo apt install libvulkan1:i386 mesa-vulkan-drivers:i386
@@ -192,3 +204,4 @@ Andika, Arvo, BioRhyme, Bitter, Exo2, Gentinum Plus, LibertinusSans, LibertinusS
 
 https://holidays.hyunbin.page/ 에서 대한민국 공휴일 정보 가져와 ics 클릭해서 달력 앱에 import
 
+seahorse - 로그인 - 암호 바꾸기

@@ -259,6 +259,40 @@ Ctrl + semicolon(period), space : 이모지 선택창 팝업
 Ctrl + semicolon(period), 이모지 이름, space, space : 해당 이모지 종류 선택창 팝업
 Ctrl + semicolon(period), 이모지 이름, space, enter : 해당 이모지 입력
 ---
+fcitx5 특수문자 및 이모지, 단축키
+영문모드에서 Ctrl + Shift + u, 유니코드 숫자, enter : 리눅스 특수문자 입력
+Ctrl + Alt + Shift + u : fcitx5 유니코드 입력
+일부앱(텍스트편집기 등)에서 Ctrl + period : 이모지 선택
+Ctrl + semicolon : 클립보드
+Super + semicolon + keyword 숫자로선택 : 상용구 or 이모지(텍스트)
+Super + semicolon + colon + emoji_name 숫자로선택 : 이모지(그림)
+Super + semicolon + backslash + character_name 숫자로선택 : 특수문자
+---
 zellij ~/.config/config.kdl
 simplified_ui true
+---
+로그 용량 & 최근 2일 로그 남기고 비우기
+journalctl --disk-usage
+sudo journalctl --vacuum-time=2d
+---
+IBus 입력기가 한글 모드 상태에서 Enter, Space, Backspace, Delete, 화살표 키를 누를 경우, 키가 안 먹고, 엉뚱한 글자가 찍힌다면
+gsettings set org.freedesktop.ibus.engine.hangul use-event-forwarding false
+---
+fcitx5
+sudo apt install fcitx5 fcitx5-hangul # 입력기 프레임워크 본체, fcitx5용 한글 입력 엔진
+sudo apt install fcitx5-config-qt : GUI 기반의 설정 도구 (KDE가 아니어도 사용 가능) 
+sudo apt install fcitx5-frontend-gtk2 fcitx5-frontend-gtk3 # GTK 기반 앱 지원  fcitx5-frontend-gtk4(선택)
+sudo apt install fcitx5-frontend-qt5 # Qt5 기반 앱 지원 (많은 최신 앱들이 사용)
+# sudo apt install fcitx5-frontend-fbterm # 터미널 환경 지원 (선택)
+... 추가로 fcitx5-frontend-gtk4 fcitx5-frontend-qt6 등등이 깔린다. 위 첫 줄만 해도 나머지 깔리는 듯. 
+Mint 설정 → 언어 지원 / 한글 입력 → fcitx5 선택	(or im-config -n fcitx5)
+---
+apt 명령어 -s : or --simulate 미리 확인해보기
+apt autoremove --purge : 설정파일 포함 모든 찌꺼기 파일까지 제거
+---
+virtualbox에 linuxmint 22.3 설치 후 업데이트 시 mint-l-theme mint-theme 설치에 무척 오래 걸린다.
+혹시 모르니 CPU RAM 넉넉히 설정하고 VMSVGA 비디오메모리 128MB 설정.
+[설정] > [저장소] > [컨트롤러: SATA]에서 '호스트 I/O 캐시 사용'을 체크.
+---
+curl cheat.sh/ls (별칭으로 alias cheat='f() { curl cheat.sh/${1} };f'를 등록하면 더 편합니다). 
 ---

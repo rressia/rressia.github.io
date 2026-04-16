@@ -6,13 +6,14 @@ tilix
 	네비게이션 스크롤, 페이지 : Shift+Ctrl+Up/Down, Shift+PageUp/PageDown
 	복사, 붙여넣기, 모두 선택 : Shift+Ctrl+C, Shift+Ctrl+V, Shift+Ctrl+A
 ranger
-	copy, cut, paste : yy, dd, pp
-	mark a files : Space
+	copy, cut, paste : yy, dd, pp	dD : delete
+	mark a files : Space			r : open_with
 	search : /
 	console : :
-	sort : oX mM-mtime, b-name sS-size
+	sort : oX mM-mtime, bB-name sS-size nN-natural
 	settings : zX h-hidden
 	curr dir shell : S
+	yd yn yp : copy dir name path
 micro
 	cut-line, duplicate-line : ^K, ^D
 	autocompletion : tab
@@ -58,3 +59,7 @@ zellij
 	^P : panel	^T : tab	^N : size	^H : move	^O : session
 	@N : new	@f : float	@ArrowKey : move focus
 	zellij a session_name	^Q : quit	^G : lock (다른 앱과 단축키 충돌시 사용)
+focuswriter
+	Ctrl + . → … (ellipsis-말줄임표)
+	Ctrl + - → – (em dash-줄표)
+	Ctrl + * → • (bullet-글머리 기호)
