@@ -63,3 +63,6 @@ focuswriter
 	Ctrl + . → … (ellipsis-말줄임표)
 	Ctrl + - → – (em dash-줄표)
 	Ctrl + * → • (bullet-글머리 기호)
+terminal
+	Ctrl + W : cut word before cursor
+	Ctrl + L : clear screen

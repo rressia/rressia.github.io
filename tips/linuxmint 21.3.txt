@@ -22,7 +22,7 @@ thorium 주소창에 chrome://flags
 
 # linuxmint 21.3 으로 설치
 
-nvidia 470 driver
+nvidia 470 driver -> 아래 nvidia-driver-470 수동설치 참고
 업데이트 매니저 - 소프트웨어 소스 변경 - 업데이트 설치
 시스템 설정 이것저것 만지기, 애플릿, 확장프로그램
 
@@ -200,8 +200,34 @@ viewmd_0.1.2_amd64.deb FBReader_Book_Reader-x86_64-2.1.4.AppImage dbeaver
 font manager의 sources 활용 - 메인글꼴 이외의 추가글꼴을 시스템에 깔지 않고 임시로 활성화/비활성화 (~/.local/share/fonts2)
 ->sources 활성화가 저장되지 않고 비활성화 상태로 돌아감. 추가글꼴 필요한 상황에서 그때그때 활성화.
 Andika, Arvo, BioRhyme, Bitter, Exo2, Gentinum Plus, LibertinusSans, LibertinusSerif, Montserrat, Open Sans, Outfit
-카페24 글꼴 - Danjunghae Ohsquare PROSlim Supermagic, 경기도체
+카페24 글꼴 - Danjunghae Ohsquare PROSlim Supermagic, 경기도체, 전남교육서체
 
 https://holidays.hyunbin.page/ 에서 대한민국 공휴일 정보 가져와 ics 클릭해서 달력 앱에 import
 
 seahorse - 로그인 - 암호 바꾸기
+
+readest 0.11.1 appimage
+export WEBKIT_DISABLE_DMABUF_RENDERER=1
+or readest.desktop exec 부분 수정
+Exec=env WEBKIT_DISABLE_DMABUF_RENDERER=1 /프로그램경로/프로그램이름
+
+캐노니컬의 우분투 업데이트 정책 변경으로 nvidia-driver-470이 580으로 연결된다. 따라서 gtx-650 카드가 지원되지 않는다.
+nouveau 사용 or nvidia-driver-390 설치&사용 or nvidia-driver-470 수동설치
+nvidia-driver-470 수동설치 :
+nvidia 사이트에서 NVIDIA-Linux-x86_64-470.256.02.run 내려받기
+sudo apt purge nvidia*
+sudo apt autoremove
+sudo apt install build-essential linux-headers-$(uname -r)
+sudo reboot
+echo 'install nouveau /bin/false' | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+sudo update-initramfs -u
+sudo reboot
+Ctrl + Alt + F3
+sudo systemctl stop lightdm
+chmod +x NVIDIA-Linux-x86_64-470.256.02.run
+sudo ./NVIDIA-Linux-x86_64-470.256.02.run
+설치 도중 "Nouveau를 차단하는 modprobe 파일을 만드시겠습니까?" 또는 이와 유사한 설정 묻는 창이 나오면 Yes
+업데이트 매니저 - 설정 - 패키지 - 차단된 패키지
+nvidia-driver-470
+nvidia-settings
+nvidia-utils-470

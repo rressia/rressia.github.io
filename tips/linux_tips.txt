@@ -167,6 +167,12 @@ gui start : systemctl set-default graphical.target (cli : multi-user.target)
 기계식 키보드 채터링 현상 -> 설정 - 편리한 기능 - 보조 입력 - 바운스 키 - 빠른 반복 입력 무시하기, 적용 지연 시간 짧은 쪽으로 조절
 ---
 ifconfig -> ip a / ip addr
+curl -4 ifconfig.me (-4 : ipv4 / -6 : ipv6)
+내 vsftp(혹은 다른 웹서비스)에 접속하기 위해서는 ip -6 addr 출력결과에서
+inet6 2406:5900:1080:fcd3:d23a:d805:9139:a2fa/64 scope global dynamic mngtmpaddr noprefixroute
+이 주소를 쓰는 게 좋다 . 위 temporary 설명 붙은 주소는 웹 브라우저 등이 사용하는 주소로 자주 바뀔 수 있다. 물론 통신사에서 프리픽스를 변경하면 두번째 주소도 바뀔 수 있다.
+이 때 주소는 []안에 넣는다. [2406:5900:1080:fcd3:d23a:d805:9139:a2fa]
+ipv6는 이처럼 주소가 각각 바로 할당되므로 ipv4처럼 NAT, 포트포워딩이 필요없다.
 ---
 vlc : 선호하는 자막 언어 KOR 아니면 KO
 ~/.config/mpv/mpv.conf : 
@@ -274,6 +280,8 @@ simplified_ui true
 로그 용량 & 최근 2일 로그 남기고 비우기
 journalctl --disk-usage
 sudo journalctl --vacuum-time=2d
+100MB만 남기고 비우기
+sudo journalctl --vacuum-size=100M
 ---
 IBus 입력기가 한글 모드 상태에서 Enter, Space, Backspace, Delete, 화살표 키를 누를 경우, 키가 안 먹고, 엉뚱한 글자가 찍힌다면
 gsettings set org.freedesktop.ibus.engine.hangul use-event-forwarding false

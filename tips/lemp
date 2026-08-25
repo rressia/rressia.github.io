@@ -139,3 +139,13 @@ sudo systemctl start vsftpd (sudo systemctl enable vsftpd)
 sudo ufw allow ftp (sudo ufw delete allow ftp)
 android cx파일탐색기 네트워크-ftp - 모드 active로 설정 후 연결
 ---
+ftp 수동모드 설정
+sudo micro /etc/vsftpd.conf
+	pasv_enable=YES
+	pasv_min_port=50000
+	pasv_max_port=50100
+sudo systemctl restart vsftpd
+sudo ufw allow 50000:50100/tcp
+sudo ufw reload
+수동모드 설정해도 액티브모드로도 접속 가능
+---
